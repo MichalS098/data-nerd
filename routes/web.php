@@ -4,6 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\DiagramController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,4 +34,6 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::resource('diagrams', DiagramController::class);
 });
