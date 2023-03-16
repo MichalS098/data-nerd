@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\DiagramController;
+use App\Http\Controllers\DiagramEntityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,4 +37,5 @@ Route::middleware([
     })->name('dashboard');
 
     Route::resource('diagrams', DiagramController::class);
+    Route::resource('diagrams.entities', DiagramEntityController::class)->only(['store', 'update', 'destroy']);
 });

@@ -5,23 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Diagram extends Model
+class Entity extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'description',      
-        'user_id',
+        'diagram_id',
     ];
 
-    public function user()
+    public function diagram()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Diagram::class);
     }
-
-    public function entities()
+    
+    public function relations()
     {
-        return $this->hasMany(Entity::class);
+        return $this->hasMany(Relation::class);
     }
 }

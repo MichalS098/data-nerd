@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Diagram;
+use App\Models\Attribute;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
-class DiagramController extends Controller
+class AttributeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {        
-        return Inertia::render('Diagrams/Index', [
-            'diagrams' => Diagram::all(),
-        ]);
+    {
+        //
     }
 
     /**
@@ -23,7 +20,7 @@ class DiagramController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -31,27 +28,21 @@ class DiagramController extends Controller
      */
     public function store(Request $request)
     {
-        Diagram::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'user_id' => $request->user()->id,
-        ]);
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Diagram $diagram)
+    public function show(Attribute $attribute)
     {
-        return Inertia::render('Diagrams/Show', [
-            'diagram' => $diagram->load('entities'),
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Diagram $diagram)
+    public function edit(Attribute $attribute)
     {
         //
     }
@@ -59,7 +50,7 @@ class DiagramController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Diagram $diagram)
+    public function update(Request $request, Attribute $attribute)
     {
         //
     }
@@ -67,7 +58,7 @@ class DiagramController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Diagram $diagram)
+    public function destroy(Attribute $attribute)
     {
         //
     }
