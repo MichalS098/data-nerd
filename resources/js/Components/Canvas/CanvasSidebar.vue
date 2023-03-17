@@ -1,5 +1,6 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
+import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/vue";
 
 const props = defineProps({
   diagram: {
@@ -10,43 +11,35 @@ const props = defineProps({
 </script>
 
 <template>
-  <aside class="bg-white w-96 p-3 flex flex-col border-r border-gray-200 h-full">
-    <div class="flex items-center gap-6">
-      <div class="w-10 h-10 rounded-full bg-swirl-900"></div>
-      <div class="flex flex-col gap-1">
-        <span class="text-lg text-swirl-900">Lorem Ipsum</span>
-        <span class="text-sm text-swirl-900">Lorem Ipsum</span>
-      </div>
-    </div>
-    <div class="flex flex-col gap-6">
-      <div class="flex flex-col gap-1">
-        <span class="text-lg text-swirl-900">Lorem Ipsum</span>
-        <span class="text-sm text-swirl-900">Lorem Ipsum</span>
-      </div>
-      <div class="flex flex-col gap-1">
-        <span class="text-lg text-swirl-900">Lorem Ipsum</span>
-        <span class="text-sm text-swirl-900">Lorem Ipsum</span>
-      </div>
-      <div class="flex flex-col gap-1">
-        <span class="text-lg text-swirl-900">Lorem Ipsum</span>
-        <span class="text-sm text-swirl-900">Lorem Ipsum</span>
-      </div>
-    </div>
-    <div class="flex flex-col gap-6">
-      <div class="flex flex-col gap-1">
-        <span class="text-lg text-swirl-900">Lorem Ipsum</span>
-        <span class="text-sm text-swirl-900">Lorem Ipsum</span>
-      </div>
-      <div class="flex flex-col gap-1">
-        <span class="text-lg text-swirl-900">Lorem Ipsum</span>
-        <span class="text-sm text-swirl-900">Lorem Ipsum</span>
-      </div>
-      <div class="flex flex-col gap-1">
-        <span class="text-lg text-swirl-900">Lorem Ipsum</span>
-        <span class="text-sm text-swirl-900">Lorem Ipsum</span>
-      </div>
-    </div>
+  <aside
+    class="bg-white w-96 border-r border-gray-200 h-full"
+  >
+    <TabGroup>
+      <TabList>
+        <Tab
+          class="
+          font-bold 
+          ui-selected:bg-blue-500 ui-selected:text-white ui-not-selected:bg-white ui-not-selected:text-black"
+        >
+          Code editor
+        </Tab>
+        <Tab
+          class="
 
-
+          ui-selected:bg-blue-500 ui-selected:text-white ui-not-selected:bg-white ui-not-selected:text-black"
+        >
+          Block builder
+        </Tab>
+        
+      </TabList>
+      <TabPanels>
+        <TabPanel>
+          test1
+        </TabPanel>
+        <TabPanel>
+          test2
+        </TabPanel>
+      </TabPanels>
+    </TabGroup>
   </aside>
 </template>

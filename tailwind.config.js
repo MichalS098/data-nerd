@@ -9,7 +9,8 @@ module.exports = {
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
     ],
-
+    blocklist: [        
+    ],
     theme: {
         container: {
             center: true,
@@ -17,7 +18,8 @@ module.exports = {
         },
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Lato', ...defaultTheme.fontFamily.sans],                
+                mono: ['JetBrains Mono', ...defaultTheme.fontFamily.mono],
             },
             colors: {
                 'canvas-sidebar-bg-dark': '#202123',
@@ -65,5 +67,9 @@ module.exports = {
         },
     },
 
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+    plugins: [
+        require('@tailwindcss/forms'), 
+        require('@tailwindcss/typography'),
+        require('@headlessui/tailwindcss')({ prefix: 'ui' })
+    ],
 };
