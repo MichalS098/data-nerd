@@ -20,6 +20,7 @@
     "dependencies": {
         "@headlessui/tailwindcss": "^0.1.2",
         "@headlessui/vue": "^1.7.12",
-        "@heroicons/vue": "^2.0.16"
+        "@heroicons/vue": "^2.0.16",
+        "highlight.js": "^11.7.0"
     }
 }
