@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('entities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');            
+            $table->string('name');
+            $table->string('description')->nullable();
             $table->foreignId('diagram_id')->constrained()->onDelete('cascade');
+            $table->integer('x')->default(0);
+            $table->integer('y')->default(0);            
             $table->timestamps();
         });
     }

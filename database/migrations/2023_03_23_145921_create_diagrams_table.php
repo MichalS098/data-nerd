@@ -14,8 +14,16 @@ return new class extends Migration
         Schema::create('diagrams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('description')->nullable();        
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            
+            $table->integer('width')->default(0);
+            $table->integer('height')->default(0);
+            $table->integer('zoom')->default(100);
+            $table->integer('x')->default(0);
+            $table->integer('y')->default(0);
+            $table->boolean('show_grid')->default(true);            
+
             $table->timestamps();
         });
     }

@@ -21,6 +21,7 @@
         "@headlessui/tailwindcss": "^0.1.2",
         "@headlessui/vue": "^1.7.12",
         "@heroicons/vue": "^2.0.16",
+        "classnames": "^2.3.2",
         "highlight.js": "^11.7.0"
     }
 }

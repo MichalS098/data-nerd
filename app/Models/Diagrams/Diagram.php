@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Diagrams;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Diagram extends Model
 {
@@ -11,17 +12,17 @@ class Diagram extends Model
 
     protected $fillable = [
         'name',
-        'description',      
+        'description',
         'user_id',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 
     public function entities()
     {
         return $this->hasMany(Entity::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

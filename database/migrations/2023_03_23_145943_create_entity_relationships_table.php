@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attributes', function (Blueprint $table) {
+        Schema::create('entity_relationships', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('entity_field_id')->constrained('entity_fields')->onDelete('cascade');
+            $table->foreignId('related_entity_field_id')->constrained('entity_fields')->onDelete('cascade');
+            $table->string('type');            
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attributes');
+        Schema::dropIfExists('entity_relationships');
     }
 };

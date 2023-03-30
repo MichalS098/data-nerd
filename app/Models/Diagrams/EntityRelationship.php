@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Diagrams;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Attribute extends Model
+class EntityRelationship extends Model
 {
     use HasFactory;
 }

@@ -6,6 +6,7 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\DiagramController;
 use App\Http\Controllers\DiagramEntityController;
+use App\Http\Controllers\EntityFieldController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,10 @@ use App\Http\Controllers\DiagramEntityController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/php-info-test', function() {
+    phpinfo();    
+});
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -38,4 +43,5 @@ Route::middleware([
 
     Route::resource('diagrams', DiagramController::class);
     Route::resource('diagrams.entities', DiagramEntityController::class)->only(['store', 'update', 'destroy']);
+    Route::resource('entities.fields', EntityFieldController::class)->only(['store', 'update', 'destroy']);
 });

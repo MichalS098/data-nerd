@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Diagram;
+use App\Models\Diagrams\Diagram;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -44,7 +44,7 @@ class DiagramController extends Controller
     public function show(Diagram $diagram)
     {
         return Inertia::render('Diagrams/Show', [
-            'diagram' => $diagram->load('entities'),
+            'diagram' => $diagram->load('entities.fields'),
         ]);
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Diagrams;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,16 +11,17 @@ class Entity extends Model
 
     protected $fillable = [
         'name',
-        'diagram_id',
+        'description',
+        'diagram_id',        
     ];
 
     public function diagram()
     {
         return $this->belongsTo(Diagram::class);
     }
-    
-    public function relations()
+
+    public function fields()
     {
-        return $this->hasMany(Relation::class);
+        return $this->hasMany(EntityField::class);
     }
 }

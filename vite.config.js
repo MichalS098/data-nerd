@@ -15,6 +15,9 @@ export default defineConfig({
                     includeAbsolute: false,
                 },
             },
+            // typescript
+            include: [/\.vue$/, /\.ts$/],
+            
         }),
     ],
 });

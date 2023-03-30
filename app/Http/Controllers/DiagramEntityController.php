@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Diagram;
+use App\Models\Diagrams\Diagram;
 use Illuminate\Http\Request;
 
 class DiagramEntityController extends Controller
 {
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Diagram $diagram, Request $request)
     {
         $request->validate([
