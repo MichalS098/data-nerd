@@ -13,6 +13,7 @@
         }
     })
 
+    // TODO: make modal with form
     const createDiagram = () => {
         const form = useForm({
             name: 'Nowy diagram',

@@ -27,7 +27,7 @@ final class {{ class }}
     {
         ${{ modelVariable }} = {{ model }}::create($request->validated());
 
-        return redirect()->route('{{ route }}.show', ${{ modelVariable }});        
+        return redirect()->route('{{ modelVariable }}s.show', ${{ modelVariable }});        
     }    
     
     public function show({{ model }} ${{ modelVariable }}): View
@@ -48,13 +48,13 @@ final class {{ class }}
     {
         ${{ modelVariable }}->update($request->validated());
 
-        return redirect()->route('{{ route }}.show', ${{ modelVariable }});
+        return redirect()->route('{{ modelVariable }}s.show', ${{ modelVariable }});
     }
     
     public function destroy({{ model }} ${{ modelVariable }}): RedirectResponse
     {
         ${{ modelVariable }}->delete();
 
-        return redirect()->route('{{ route }}.index');
+        return redirect()->route('{{ modelVariable }}s.index');
     }
 }

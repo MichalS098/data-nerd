@@ -1,74 +1,57 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Diagrams\DiagramPostRequest;
 use App\Models\Diagrams\Diagram;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
-class DiagramController extends Controller
+final class DiagramController
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {        
-        return Inertia::render('Diagrams/Index', [
-            'diagrams' => Diagram::all(),
-        ]);
+    public function index(Request $request): Response
+    {
+        return Inertia::render(
+            component: 'Diagrams/Index',
+            props: [
+                'diagrams' => $request->user()->diagrams()->paginate(),
+            ]
+        );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(DiagramPostRequest $request): RedirectResponse
     {
-        
+        Diagram::create($request->validated());
+
+        return redirect()->route('diagrams.index')->with('success', 'Diagram created.');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function show(Diagram $diagram): Response
     {
-        Diagram::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'user_id' => $request->user()->id,
-        ]);
+        if ($diagram->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        return Inertia::render(
+            component: 'Diagrams/Show',
+            props: [
+                'diagram' => $diagram->load('entities.fields'),
+            ]
+        );
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Diagram $diagram)
+    public function destroy(Diagram $diagram): RedirectResponse
     {
-        return Inertia::render('Diagrams/Show', [
-            'diagram' => $diagram->load('entities.fields'),
-        ]);
-    }
+        if ($diagram->user_id !== auth()->id()) {
+            abort(403);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Diagram $diagram)
-    {
-        //
-    }
+        $diagram->delete();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Diagram $diagram)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Diagram $diagram)
-    {
-        //
+        return redirect()->route('diagrams.index')->with('success', 'Diagram deleted.');
     }
 }
