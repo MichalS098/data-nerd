@@ -4,9 +4,10 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-use App\Http\Controllers\DiagramController;
-use App\Http\Controllers\DiagramEntityController;
-use App\Http\Controllers\EntityFieldController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Diagrams\DiagramController;
+use App\Http\Controllers\Diagrams\DiagramEntityController;
+use App\Http\Controllers\Diagrams\EntityFieldController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,8 @@ use App\Http\Controllers\EntityFieldController;
 |
 */
 
-Route::get('/php-info-test', function() {
-    phpinfo();    
+Route::get('/php-info-test', function () {
+    phpinfo();
 });
 
 Route::get('/', function () {
@@ -37,10 +38,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
-
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('diagrams', DiagramController::class);
     Route::resource('diagrams.entities', DiagramEntityController::class)->only(['store', 'update', 'destroy']);
     Route::resource('entities.fields', EntityFieldController::class)->only(['store', 'update', 'destroy']);

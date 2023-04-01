@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Diagrams;
 
 use App\Models\Diagrams\Entity;
 use Illuminate\Http\Request;
 
-class EntityController extends Controller
+final class EntityController
 {
     /**
      * Display a listing of the resource.

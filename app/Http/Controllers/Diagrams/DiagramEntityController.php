@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Diagrams;
 
 use App\Models\Diagrams\Diagram;
 use Illuminate\Http\Request;
 
-class DiagramEntityController extends Controller
+final class DiagramEntityController
 {
     public function store(Diagram $diagram, Request $request)
     {

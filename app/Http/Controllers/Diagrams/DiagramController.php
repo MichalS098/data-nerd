@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Diagrams;
 
 use App\Http\Requests\Diagrams\DiagramPostRequest;
 use App\Models\Diagrams\Diagram;

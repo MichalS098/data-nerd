@@ -17,7 +17,6 @@ const props = defineProps({
 
 <template>
   <div class="h-screen w-full overflow-hidden flex flex-col">
-
     <Head :title="props.diagram.name" />
     <CanvasHeader />
     <div class="flex-1 flex overflow-hidden">

@@ -5,30 +5,27 @@ use App\Models\User;
 
 it('shows the diagrams index page when authenticated', function () {
     $user = User::factory()->create();
-    $this->actingAs($user);
-    $response = $this->get(route('diagrams.index'));
-    $response->assertStatus(200);
+    $this->actingAs($user)
+        ->get(route('diagrams.index'))
+        ->assertStatus(200);
 });
 
 
 it('dont show the diagrams index page when not authenticated', function () {
-    $response = $this->get(route('diagrams.index'));
-    $response->assertStatus(302);
+    $this->get(route('diagrams.index'))->assertStatus(302);
 });
 
 
 it('creates a diagram when authenticated', function () {
     $user = User::factory()->create();
 
-    $this->actingAs($user);
+    $this->actingAs($user)
+        ->post(route('diagrams.store'), [
+            'name' => 'Test Diagram',
+            'description' => 'Test Diagram Description',
+            'user_id' => $user->id,
+        ])->assertRedirect(route('diagrams.index'));
 
-    $response = $this->post(route('diagrams.store'), [
-        'name' => 'Test Diagram',
-        'description' => 'Test Diagram Description',
-        'user_id' => $user->id,
-    ]);
-    
-    $response->assertRedirect(route('diagrams.index'));    
     $this->assertDatabaseHas('diagrams', [
         'name' => 'Test Diagram',
         'description' => 'Test Diagram Description',
@@ -42,9 +39,8 @@ it('dont create a diagram when not authenticated', function () {
         'name' => 'Test Diagram not auth',
         'description' => 'Test Diagram Description not auth',
         'user_id' => 1,
-    ]);
+    ])->assertStatus(302);
 
-    $response->assertStatus(302);
     $this->assertDatabaseMissing('diagrams', [
         'name' => 'Test Diagram not auth',
         'description' => 'Test Diagram Description not auth',
@@ -57,11 +53,9 @@ it('shows the diagram show page when authenticated', function () {
         'user_id' => $user->id,
     ]);
 
-    $this->actingAs($user);
-
-    $response = $this->get(route('diagrams.show', $diagram));
-
-    $response->assertStatus(200);
+    $this->actingAs($user)
+        ->get(route('diagrams.show', $diagram))
+        ->assertStatus(200);
 });
 
 it('shows diagram show page when it belongs to the authenticated user', function () {
@@ -70,11 +64,9 @@ it('shows diagram show page when it belongs to the authenticated user', function
         'user_id' => $user->id,
     ]);
 
-    $this->actingAs($user);
-
-    $response = $this->get(route('diagrams.show', $diagram));
-
-    $response->assertStatus(200);
+    $this->actingAs($user)
+        ->get(route('diagrams.show', $diagram))
+        ->assertStatus(200);
 });
 
 it('dont show diagram show page when it doesnt belong to the authenticated user', function () {
@@ -84,11 +76,9 @@ it('dont show diagram show page when it doesnt belong to the authenticated user'
         'user_id' => $user2->id,
     ]);
 
-    $this->actingAs($user1);
-
-    $response = $this->get(route('diagrams.show', $diagram));
-
-    $response->assertStatus(403);
+    $this->actingAs($user1)
+        ->get(route('diagrams.show', $diagram))
+        ->assertStatus(403);
 });
 
 
@@ -103,10 +93,24 @@ it('shows only diagrams that belong to the authenticated user', function () {
         'user_id' => $user2->id,
     ]);
 
-    $this->actingAs($user1);
+    $this->actingAs($user1)
+        ->get(route('diagrams.index'))
+        ->assertStatus(200)
+        ->assertSee($diagram1->name)
+        ->assertDontSee($diagram2->name);
+});
 
-    $response = $this->get(route('diagrams.index'));
-    $response->assertStatus(200);
-    $response->assertSee($diagram1->name);
-    $response->assertDontSee($diagram2->name);    
+it('deletes a diagram when authenticated', function () {
+    $user = User::factory()->create();
+    $diagram = Diagram::factory()->create([
+        'user_id' => $user->id,
+    ]);
+
+    $this->actingAs($user)
+        ->delete(route('diagrams.destroy', $diagram))
+        ->assertRedirect(route('diagrams.index'));
+
+    $this->assertDatabaseMissing('diagrams', [
+        'id' => $diagram->id,
+    ]);
 });
